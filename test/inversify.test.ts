@@ -1,9 +1,9 @@
 /// <reference path="./globals.d.ts" />
 
-import { expect } from "chai";
+import {expect} from "chai";
 import "es6-symbol/implement";
 import * as ERROR_MSGS from "../src/constants/error_msgs";
-import { interfaces } from "../src/interfaces/interfaces";
+import {interfaces} from "../src/interfaces/interfaces";
 import {
     Container, ContainerModule, decorate, inject,
     injectable, LazyServiceIdentifer, multiInject, named, tagged, targetName,
@@ -16,6 +16,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -55,8 +56,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() {return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -101,8 +107,14 @@ describe("InversifyJS", () => {
                 this._katana = katana;
                 this._shuriken = shuriken;
             }
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
         }
 
         decorate(injectable(), Katana);
@@ -150,8 +162,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -171,6 +188,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -216,8 +234,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -237,6 +260,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -282,8 +306,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -303,6 +332,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -339,8 +369,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -363,9 +398,15 @@ describe("InversifyJS", () => {
         expect(ninja.fight()).eql("cut!");
         expect(ninja.sneak()).eql("hit!");
 
-        const tryGetNinja = () => { container.get("Ninja"); };
-        const tryGetKatana = () => { container.get("Katana"); };
-        const tryGetShuruken = () => { container.get("Shuriken"); };
+        const tryGetNinja = () => {
+            container.get("Ninja");
+        };
+        const tryGetKatana = () => {
+            container.get("Katana");
+        };
+        const tryGetShuruken = () => {
+            container.get("Shuriken");
+        };
 
         // unload
         container.unload(warriors);
@@ -384,6 +425,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -398,9 +440,11 @@ describe("InversifyJS", () => {
         @injectable()
         class Katana implements Katana {
             private _usageCount: number;
+
             public constructor() {
                 this._usageCount = 0;
             }
+
             public hit() {
                 this._usageCount = this._usageCount + 1;
                 return `This katana was used ${this._usageCount} times!`;
@@ -410,9 +454,11 @@ describe("InversifyJS", () => {
         @injectable()
         class Shuriken implements Shuriken {
             private _shurikenCount: number;
+
             public constructor() {
                 this._shurikenCount = 10;
             }
+
             public throw() {
                 this._shurikenCount = this._shurikenCount - 1;
                 return `Only ${this._shurikenCount} items left!`;
@@ -433,8 +479,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -462,6 +513,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Hero {
             public name: string;
+
             public constructor() {
                 this.name = heroName;
             }
@@ -490,6 +542,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Hero implements Warrior {
             public name: string;
+
             public constructor() {
                 this.name = heroName;
             }
@@ -512,9 +565,11 @@ describe("InversifyJS", () => {
         @injectable()
         class UseDate implements UseDate {
             public currentDate: Date;
+
             public constructor(@inject("Date") currentDate: Date) {
                 this.currentDate = currentDate;
             }
+
             public doSomething() {
                 return this.currentDate;
             }
@@ -545,15 +600,19 @@ describe("InversifyJS", () => {
 
         type ShortDistanceWeaponFactory = () => ShortDistanceWeapon;
 
-        interface KatanaBlade { }
+        interface KatanaBlade {
+        }
 
         @injectable()
-        class KatanaBlade implements KatanaBlade { }
+        class KatanaBlade implements KatanaBlade {
+        }
 
-        interface KatanaHandler { }
+        interface KatanaHandler {
+        }
 
         @injectable()
-        class KatanaHandler implements KatanaHandler { }
+        class KatanaHandler implements KatanaHandler {
+        }
 
         interface ShortDistanceWeapon {
             handler: KatanaHandler;
@@ -564,16 +623,19 @@ describe("InversifyJS", () => {
         class Katana implements ShortDistanceWeapon {
             public handler: KatanaHandler;
             public blade: KatanaBlade;
+
             public constructor(handler: KatanaHandler, blade: KatanaBlade) {
                 this.handler = handler;
                 this.blade = blade;
             }
         }
 
-        interface LongDistanceWeapon { }
+        interface LongDistanceWeapon {
+        }
 
         @injectable()
-        class Shuriken implements LongDistanceWeapon { }
+        class Shuriken implements LongDistanceWeapon {
+        }
 
         interface Warrior {
             shortDistanceWeaponFactory: ShortDistanceWeaponFactory;
@@ -584,6 +646,7 @@ describe("InversifyJS", () => {
         class Ninja implements Warrior {
             public shortDistanceWeaponFactory: ShortDistanceWeaponFactory;
             public longDistanceWeapon: LongDistanceWeapon;
+
             public constructor(
                 @inject(shortDistanceWeaponFactoryId) @targetName("katana") shortDistanceWeaponFactory: ShortDistanceWeaponFactory,
                 @inject(longDistanceWeaponId) @targetName("shuriken") longDistanceWeapon: LongDistanceWeapon
@@ -617,6 +680,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -656,8 +720,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -677,6 +746,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -716,8 +786,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -740,6 +815,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -774,8 +850,13 @@ describe("InversifyJS", () => {
                 this._shuriken = weaponFactory(true);
             }
 
-            public fight() { return this._katana.use(); }
-            public sneak() { return this._shuriken.use(); }
+            public fight() {
+                return this._katana.use();
+            }
+
+            public sneak() {
+                return this._shuriken.use();
+            }
 
         }
 
@@ -797,15 +878,19 @@ describe("InversifyJS", () => {
 
     it("Should support the injection of user defined factories with partial application", () => {
 
-        interface InjectorPump { }
+        interface InjectorPump {
+        }
 
         @injectable()
-        class InjectorPump implements InjectorPump { }
+        class InjectorPump implements InjectorPump {
+        }
 
-        interface SparkPlugs { }
+        interface SparkPlugs {
+        }
 
         @injectable()
-        class SparkPlugs implements SparkPlugs { }
+        class SparkPlugs implements SparkPlugs {
+        }
 
         class Engine {
             public displacement: number | null;
@@ -815,12 +900,14 @@ describe("InversifyJS", () => {
         class DieselEngine implements Engine {
             public displacement: number | null;
             private _injectorPump: InjectorPump;
+
             public constructor(
                 @inject("InjectorPump") injectorPump: InjectorPump
             ) {
                 this._injectorPump = injectorPump;
                 this.displacement = null;
             }
+
             public debug() {
                 return this._injectorPump;
             }
@@ -830,12 +917,14 @@ describe("InversifyJS", () => {
         class PetrolEngine implements Engine {
             public displacement: number | null;
             private _sparkPlugs: SparkPlugs;
+
             public constructor(
                 @inject("SparkPlugs") sparkPlugs: SparkPlugs
             ) {
                 this._sparkPlugs = sparkPlugs;
                 this.displacement = null;
             }
+
             public debug() {
                 return this._sparkPlugs;
             }
@@ -848,11 +937,13 @@ describe("InversifyJS", () => {
         @injectable()
         class DieselCarFactory implements CarFactory {
             private _dieselFactory: (displacement: number) => Engine;
+
             public constructor(
                 @inject("Factory<Engine>") factory: (category: string) => (displacement: number) => Engine
             ) {
                 this._dieselFactory = factory("diesel");
             }
+
             public createEngine(displacement: number): Engine {
                 return this._dieselFactory(displacement);
             }
@@ -885,6 +976,7 @@ describe("InversifyJS", () => {
 
         interface Ninja {
             fight(): string;
+
             sneak(): string;
         }
 
@@ -924,8 +1016,13 @@ describe("InversifyJS", () => {
                 this._shuriken = shuriken;
             }
 
-            public fight() { return this._katana.hit(); }
-            public sneak() { return this._shuriken.throw(); }
+            public fight() {
+                return this._katana.hit();
+            }
+
+            public sneak() {
+                return this._shuriken.throw();
+            }
 
         }
 
@@ -996,7 +1093,8 @@ describe("InversifyJS", () => {
                 expect(ninja.katana.hit()).eql("cut!");
                 done();
             })
-            .catch((e) => { /* do nothing */ });
+            .catch((e) => { /* do nothing */
+            });
 
     });
 
@@ -1030,6 +1128,7 @@ describe("InversifyJS", () => {
             class Ninja implements Warrior {
                 public katana: Weapon;
                 public shuriken: Weapon;
+
                 public constructor(@multiInject(weaponId) weapons: Weapon[]) {
                     this.katana = weapons[0];
                     this.shuriken = weapons[1];
@@ -1059,6 +1158,7 @@ describe("InversifyJS", () => {
 
             interface Ninja {
                 fight(): string;
+
                 sneak(): string;
             }
 
@@ -1098,8 +1198,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1147,6 +1252,7 @@ describe("InversifyJS", () => {
 
             interface Warrior {
                 fight(): string;
+
                 sneak(): string;
             }
 
@@ -1186,8 +1292,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1274,6 +1385,7 @@ describe("InversifyJS", () => {
             class Ninja {
                 public katana: Weapon;
                 public shuriken: Weapon;
+
                 public constructor(@multiInject(Weapon) weapons: Weapon[]) {
                     this.katana = weapons[0];
                     this.shuriken = weapons[1];
@@ -1329,8 +1441,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1393,8 +1510,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1475,6 +1597,7 @@ describe("InversifyJS", () => {
             class Ninja implements Warrior {
                 public katana: Weapon;
                 public shuriken: Weapon;
+
                 public constructor(@multiInject(TYPES.Weapon) weapons: Weapon[]) {
                     this.katana = weapons[0];
                     this.shuriken = weapons[1];
@@ -1511,6 +1634,7 @@ describe("InversifyJS", () => {
 
             interface Ninja {
                 fight(): string;
+
                 sneak(): string;
             }
 
@@ -1550,8 +1674,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1601,6 +1730,7 @@ describe("InversifyJS", () => {
 
             interface Ninja {
                 fight(): string;
+
                 sneak(): string;
             }
 
@@ -1640,8 +1770,13 @@ describe("InversifyJS", () => {
                     this._shuriken = shuriken;
                 }
 
-                public fight() { return this._katana.hit(); }
-                public sneak() { return this._shuriken.throw(); }
+                public fight() {
+                    return this._katana.hit();
+                }
+
+                public sneak() {
+                    return this._shuriken.throw();
+                }
 
             }
 
@@ -1703,13 +1838,16 @@ describe("InversifyJS", () => {
 
         enum Tag { CanThrow }
 
-        interface Weapon { }
+        interface Weapon {
+        }
 
         @injectable()
-        class Katana implements Weapon { }
+        class Katana implements Weapon {
+        }
 
         @injectable()
-        class Shuriken implements Weapon { }
+        class Shuriken implements Weapon {
+        }
 
         interface Warrior {
             katana: Weapon;
@@ -1720,6 +1858,7 @@ describe("InversifyJS", () => {
         class Ninja implements Warrior {
             public katana: Weapon;
             public shuriken: Weapon;
+
             public constructor(
                 @inject("Weapon") @tagged("canThrow", false) katana: Weapon,
                 @inject("Weapon") @tagged(Tag.CanThrow, true) shuriken: Weapon
@@ -1742,13 +1881,16 @@ describe("InversifyJS", () => {
 
     it("Should support custom tag decorators", () => {
 
-        interface Weapon { }
+        interface Weapon {
+        }
 
         @injectable()
-        class Katana implements Weapon { }
+        class Katana implements Weapon {
+        }
 
         @injectable()
-        class Shuriken implements Weapon { }
+        class Shuriken implements Weapon {
+        }
 
         interface Warrior {
             katana: Weapon;
@@ -1762,6 +1904,7 @@ describe("InversifyJS", () => {
         class Ninja implements Warrior {
             public katana: Weapon;
             public shuriken: Weapon;
+
             public constructor(
                 @inject("Weapon") @notThrowable katana: Weapon,
                 @inject("Weapon") @throwable shuriken: Weapon
@@ -1786,13 +1929,16 @@ describe("InversifyJS", () => {
 
         const name: symbol = Symbol.for("Weak");
 
-        interface Weapon { }
+        interface Weapon {
+        }
 
         @injectable()
-        class Katana implements Weapon { }
+        class Katana implements Weapon {
+        }
 
         @injectable()
-        class Shuriken implements Weapon { }
+        class Shuriken implements Weapon {
+        }
 
         interface Warrior {
             katana: Weapon;
@@ -1803,6 +1949,7 @@ describe("InversifyJS", () => {
         class Ninja implements Warrior {
             public katana: Weapon;
             public shuriken: Weapon;
+
             public constructor(
                 @inject("Weapon") @named("strong") katana: Weapon,
                 @inject("Weapon") @named(name) shuriken: Weapon
@@ -1825,13 +1972,16 @@ describe("InversifyJS", () => {
 
     it("Should support contextual bindings and targetName annotation", () => {
 
-        interface Weapon { }
+        interface Weapon {
+        }
 
         @injectable()
-        class Katana implements Weapon { }
+        class Katana implements Weapon {
+        }
 
         @injectable()
-        class Shuriken implements Weapon { }
+        class Shuriken implements Weapon {
+        }
 
         interface Warrior {
             katana: Weapon;
@@ -1842,6 +1992,7 @@ describe("InversifyJS", () => {
         class Ninja implements Warrior {
             public katana: Weapon;
             public shuriken: Weapon;
+
             public constructor(
                 @inject("Weapon") @targetName("katana") katana: Weapon,
                 @inject("Weapon") @targetName("shuriken") shuriken: Weapon
@@ -1875,6 +2026,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Katana implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "katana";
             }
@@ -1883,6 +2035,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Shuriken implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "shuriken";
             }
@@ -1909,6 +2062,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Katana implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "katana";
             }
@@ -1917,6 +2071,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Shuriken implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "shuriken";
             }
@@ -1954,6 +2109,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Katana implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "katana";
             }
@@ -1980,6 +2136,7 @@ describe("InversifyJS", () => {
         @injectable()
         class SamuraiMaster2 extends Samurai implements Warrior {
             public isMaster: boolean;
+
             public constructor(@inject(SYMBOLS.Weapon) weapon: Weapon) {
                 super(weapon);
                 this.isMaster = true;
@@ -1992,7 +2149,9 @@ describe("InversifyJS", () => {
         container.bind<Warrior>(SYMBOLS.SamuraiMaster).to(SamuraiMaster);
         container.bind<Warrior>(SYMBOLS.SamuraiMaster2).to(SamuraiMaster2);
 
-        const errorFunction = () => { container.get<Warrior>(SYMBOLS.SamuraiMaster); };
+        const errorFunction = () => {
+            container.get<Warrior>(SYMBOLS.SamuraiMaster);
+        };
         const error = ERROR_MSGS.ARGUMENTS_LENGTH_MISMATCH("SamuraiMaster");
         expect(errorFunction).to.throw(error);
 
@@ -2013,6 +2172,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Base1 {
             public prop: string;
+
             public constructor(arg: string) {
                 this.prop = arg;
             }
@@ -2026,7 +2186,9 @@ describe("InversifyJS", () => {
         }
 
         container.bind<Base1>(Base1Id).to(Derived1);
-        const tryGet = () => { container.get(Base1Id); };
+        const tryGet = () => {
+            container.get(Base1Id);
+        };
         const error = ERROR_MSGS.ARGUMENTS_LENGTH_MISMATCH("Derived1");
         expect(tryGet).to.throw(error);
 
@@ -2037,6 +2199,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Base2 {
             public prop1: string;
+
             public constructor(@unmanaged() arg1: string) {
                 this.prop1 = arg1;
             }
@@ -2062,6 +2225,7 @@ describe("InversifyJS", () => {
         class Base3 {
             public prop1: string;
             public prop2: string;
+
             public constructor(@unmanaged() arg1: string, arg2: string) {
                 this.prop1 = arg1;
                 this.prop2 = arg2;
@@ -2098,6 +2262,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Katana implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "katana";
             }
@@ -2106,6 +2271,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Bokken implements Weapon {
             public name: string;
+
             public constructor() {
                 this.name = "bokken";
             }
@@ -2171,6 +2337,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2179,6 +2346,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2191,6 +2359,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2254,6 +2423,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2262,6 +2432,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2274,6 +2445,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2337,6 +2509,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2345,6 +2518,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2357,6 +2531,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2435,6 +2610,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2443,6 +2619,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2455,6 +2632,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2533,6 +2711,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2541,6 +2720,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2553,6 +2733,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2631,6 +2812,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Wood implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "wood";
             }
@@ -2639,6 +2821,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Iron implements Material {
             public name: string;
+
             public constructor() {
                 this.name = "iron";
             }
@@ -2651,6 +2834,7 @@ describe("InversifyJS", () => {
         @injectable()
         class Sword implements Weapon {
             public material: Material;
+
             public constructor(@inject("Material") material: Material) {
                 this.material = material;
             }
@@ -2793,4 +2977,247 @@ describe("InversifyJS", () => {
 
     });
 
+    it.only("understand scopes", () => {
+        @injectable()
+        class Through {
+            private _times: number = 0;
+            get times() {
+                this._times++;
+                return this._times;
+            }
+        }
+
+        @injectable()
+        class NestedRequest {
+            @inject("transient_through") public transientThrough: Through;
+            @inject("request_through") public requestThrough: Through;
+            @inject("singleton_through") public singletonThrough: Through;
+        }
+
+        @injectable()
+        class Wrapper {
+            @inject("transient_through") public transientThrough: Through;
+            @inject("request_through") public requestThrough: Through;
+            @inject("singleton_through") public singletonThrough: Through;
+            @inject("transient_nested") public transientNested: NestedRequest;
+            @inject("request_nested") public requestNested: NestedRequest;
+            @inject("singleton_nested") public singletonNested: NestedRequest;
+        }
+        const container = new Container();
+        container.bind<Through>("transient_through").to(Through).inTransientScope();
+        container.bind<Through>("request_through").to(Through).inRequestScope();
+        container.bind<Through>("singleton_through").to(Through).inSingletonScope();
+        container.bind<Wrapper>("transient_wrapper").to(Wrapper).inTransientScope();
+        container.bind<Wrapper>("request_wrapper").to(Wrapper).inRequestScope();
+        container.bind<Wrapper>("singleton_wrapper").to(Wrapper).inSingletonScope();
+        container.bind<NestedRequest>("transient_nested").to(NestedRequest).inTransientScope();
+        container.bind<NestedRequest>("request_nested").to(NestedRequest).inRequestScope();
+        container.bind<NestedRequest>("singleton_nested").to(NestedRequest).inSingletonScope();
+        const transientWrapper = container.get<Wrapper>("transient_wrapper");
+        const requestWrapper = container.get<Wrapper>("request_wrapper");
+        const singletonWrapper = container.get<Wrapper>("singleton_wrapper");
+
+        expect(requestWrapper.requestThrough.times).eq(1);
+        expect(requestWrapper.singletonThrough.times).eq(1);
+        expect(requestWrapper.transientThrough.times).eq(1);
+        expect(requestWrapper.requestNested.singletonThrough.times).eq(2);
+        expect(requestWrapper.requestNested.transientThrough.times).eq(1);
+        expect(requestWrapper.requestNested.requestThrough.times).eq(2);
+        expect(requestWrapper.singletonNested.singletonThrough.times).eq(3);
+        expect(requestWrapper.singletonNested.requestThrough.times).eq(1);
+        expect(requestWrapper.singletonNested.transientThrough.times).eq(1);
+        expect(requestWrapper.transientNested.singletonThrough.times).eq(4);
+        expect(requestWrapper.transientNested.transientThrough.times).eq(1);
+        expect(requestWrapper.transientNested.requestThrough.times).eq(3);
+
+        expect(transientWrapper.requestThrough.times).eq(2); // shouldnt it be 1
+        expect(transientWrapper.singletonThrough.times).eq(5);
+        expect(transientWrapper.transientThrough.times).eq(1);
+        expect(transientWrapper.requestNested.singletonThrough.times).eq(6);
+        expect(transientWrapper.requestNested.transientThrough.times).eq(1);
+        expect(transientWrapper.requestNested.requestThrough.times).eq(2);
+        expect(transientWrapper.singletonNested.singletonThrough.times).eq(7);
+        expect(transientWrapper.singletonNested.requestThrough.times).eq(1);
+        expect(transientWrapper.singletonNested.transientThrough.times).eq(1);
+        expect(transientWrapper.transientNested.singletonThrough.times).eq(8);
+        expect(transientWrapper.transientNested.transientThrough.times).eq(1);
+        expect(transientWrapper.transientNested.requestThrough.times).eq(1);
+
+        expect(singletonWrapper.requestThrough.times).eq(3);
+        expect(singletonWrapper.singletonThrough.times).eq(9);
+        expect(singletonWrapper.transientThrough.times).eq(1);
+        expect(singletonWrapper.requestNested.singletonThrough.times).eq(10);
+        expect(singletonWrapper.requestNested.transientThrough.times).eq(1);
+        expect(singletonWrapper.requestNested.requestThrough.times).eq(1);
+        expect(singletonWrapper.singletonNested.singletonThrough.times).eq(11);
+        expect(singletonWrapper.singletonNested.requestThrough.times).eq(1);
+        expect(singletonWrapper.singletonNested.transientThrough.times).eq(1);
+        expect(singletonWrapper.transientNested.singletonThrough.times).eq(12);
+        expect(singletonWrapper.transientNested.transientThrough.times).eq(1);
+        expect(singletonWrapper.transientNested.requestThrough.times).eq(1);
+
+        // const transientWrapper2 = container.get<Wrapper>("transient_wrapper");
+        // const requestWrapper2 = container.get<Wrapper>("request_wrapper");
+        // const singletonWrapper2 = container.get<Wrapper>("singleton_wrapper");
+        // expect(transientWrapper2.requestThrough.times).eq(1);
+        // expect(transientWrapper2.singletonThrough.times).eq(4);
+        // expect(transientWrapper2.transientThrough.times).eq(1);
+        // expect(requestWrapper2.requestThrough.times).eq(1);
+        // expect(requestWrapper2.singletonThrough.times).eq(5);
+        // expect(requestWrapper2.transientThrough.times).eq(1);
+        // expect(singletonWrapper2.requestThrough.times).eq(2);
+        // expect(singletonWrapper2.singletonThrough.times).eq(6);
+        // expect(singletonWrapper2.transientThrough.times).eq(2);
+    });
+
+    it("how constant value behave", () => {
+
+        @injectable()
+        class InAbstract {
+            public inAbstract() {
+                return "InAbstract";
+            }
+        }
+
+        @injectable()
+        abstract class Abstract {
+            @inject("inabstract") protected inAbstract: InAbstract;
+
+            public sayHi() {
+                return this.inAbstract.inAbstract();
+            }
+        }
+
+        @injectable()
+        abstract class AbstractWithConstructor {
+            protected inAbstract: InAbstract;
+            constructor(@inject("inabstract") _inAbstract: InAbstract) {
+                this.inAbstract = _inAbstract;
+            }
+
+            public sayHi() {
+                return this.inAbstract.inAbstract();
+            }
+        }
+
+        @injectable()
+        class OtherClass {
+            public rank: number = 0;
+
+            public otherClass() {
+                this.rank++;
+                return "otherclass" + this.rank;
+            }
+        }
+
+        @injectable()
+        class ConstantClass extends Abstract {
+            @inject("otherclass") private otherClass: OtherClass;
+
+            public constantClass() {
+                return "ConstantClass" + this.otherClass.otherClass();
+                // return "ConstantClass";
+            }
+        }
+
+        @injectable()
+        class ConstantWithConstructorClass extends Abstract {
+            protected hi: string;
+            @inject("otherclass") private otherClass: OtherClass;
+            constructor() {
+                super();
+                this.hi = "hi";
+            }
+            public constantClass() {
+                return "ConstantClass" + this.otherClass.otherClass() + this.hi;
+                // return "ConstantClass";
+            }
+        }
+
+        @injectable()
+        class ConstantInjectConstructor extends AbstractWithConstructor {
+            @inject("otherclass") private otherClass: OtherClass;
+
+            public constantClass() {
+                return "ConstantClass" + this.otherClass.otherClass();
+                // return "ConstantClass";
+            }
+        }
+
+        @injectable()
+        class ConstantWithConstructor extends AbstractWithConstructor {
+            protected otherClass: OtherClass;
+            constructor(@inject("otherclass") _otherClass: OtherClass, @inject("inabstract") _inAbstract: InAbstract) {
+                super(_inAbstract);
+                this.otherClass = _otherClass;
+            }
+
+            public constantClass() {
+                return "ConstantClass" + this.otherClass.otherClass();
+                // return "ConstantClass";
+            }
+        }
+
+        class NonInjectable {
+            @inject("otherclass") private otherClass: OtherClass;
+
+            public constantClass() {
+                return "ConstantClass" + this.otherClass.otherClass();
+                // return "ConstantClass";
+            }
+        }
+
+        const container = new Container();
+        container.bind<InAbstract>("inabstract").to(InAbstract);
+        container.bind<OtherClass>("otherclass").to(OtherClass);
+        const inAbstract = container.get<InAbstract>("inabstract");
+        const otherClass = container.get<OtherClass>("otherclass");
+        container.bind<ConstantClass>("constantclass").toConstantValue(new ConstantClass());
+        container.bind<ConstantInjectConstructor>("constantinjectconstructor")
+            .toConstantValue(new ConstantInjectConstructor(inAbstract));
+        container.bind<ConstantWithConstructor>("constatntwithconstructor")
+            .toConstantValue(new ConstantWithConstructor(otherClass, inAbstract));
+        container.bind<ConstantClass>("instance").to(ConstantClass);
+        container.bind<ConstantWithConstructorClass>("constantwithinjectandconstructor")
+            .toConstantValue(new ConstantWithConstructorClass());
+
+        const constant = container.get<ConstantClass>("constantclass");
+        try {
+            constant.constantClass();
+            expect("ddd").eq("");
+        } catch (err) {
+            expect(err).instanceof(TypeError);
+        }
+        const constant2 = container.get<ConstantInjectConstructor>("constantinjectconstructor");
+        try {
+            constant2.constantClass();
+            expect("ddd").eq("");
+        } catch (err) {
+            expect(err).instanceof(TypeError);
+        }
+        const constant3 = container.get<ConstantWithConstructor>("constatntwithconstructor");
+        constant3.constantClass();
+        constant3.sayHi();
+        const instantce = container.get<ConstantClass>("instance");
+        instantce.constantClass();
+        instantce.sayHi();
+        const constant4 = container.get<ConstantWithConstructorClass>("constantwithinjectandconstructor");
+        try {
+            constant4.constantClass();
+        } catch (err) {
+            expect(err).instanceof(TypeError);
+        }
+        try {
+            constant4.sayHi();
+        } catch (err) {
+            expect(err).instanceof(TypeError);
+        }
+
+        const instance2 = new NonInjectable();
+        try {
+            instance2.constantClass();
+        } catch (err) {
+            expect(err).instanceof(TypeError);
+        }
+    });
 });
